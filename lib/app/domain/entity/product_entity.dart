@@ -10,9 +10,9 @@ class ProductEntity {
   final bool isFeatured;
   final bool onSale;
   final bool isSaleable;
-  final double minPrice;
-  final double regularPrice;
-  final double avgRatings;
+  final num minPrice;
+  final num regularPrice;
+  final num avgRatings;
 
   ProductEntity({
     required this.id,

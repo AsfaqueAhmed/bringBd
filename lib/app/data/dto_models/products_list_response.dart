@@ -1,3 +1,5 @@
+import 'package:bring_me_bd/app/data/dto_models/product_details_response.dart';
+
 class ProductListResponse {
   List<Product>? data;
   PaginationLinks? links;
@@ -33,90 +35,106 @@ class ProductListResponse {
 }
 
 class Product {
-  num? id;
-  String? sku;
+
+  int? id;
+  String? type;
   String? name;
-  String? description;
   String? urlKey;
-  ProductImage? baseImage;
+  num? price;
+  String? formatedPrice;
+  String? shortDescription;
+  String? description;
+  String? sku;
   List<ProductImage>? images;
-  bool? isNew;
-  bool? isFeatured;
-  bool? onSale;
-  bool? isSaleable;
-  bool? isWishlist;
-  String? minPrice;
-  Prices? prices;
-  String? priceHtml;
-  num? avgRatings;
+  ProductImage? baseImage;
+  List<Variants>? variants;
+  bool? inStock;
+  Reviews? reviews;
+  bool? isSaved;
+  String? createdAt;
+  String? updatedAt;
+
 
   Product(
       {this.id,
-      this.sku,
-      this.name,
-      this.description,
-      this.urlKey,
-      this.baseImage,
-      this.images,
-      this.isNew,
-      this.isFeatured,
-      this.onSale,
-      this.isSaleable,
-      this.isWishlist,
-      this.minPrice,
-      this.prices,
-      this.priceHtml,
-      this.avgRatings});
+        this.type,
+        this.name,
+        this.urlKey,
+        this.price,
+        this.formatedPrice,
+        this.shortDescription,
+        this.description,
+        this.sku,
+        this.images,
+        this.baseImage,
+        this.variants,
+        this.inStock,
+        this.reviews,
+        this.isSaved,
+        this.createdAt,
+        this.updatedAt});
 
   Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    sku = json['sku'];
+    type = json['type'];
     name = json['name'];
-    description = json['description'];
     urlKey = json['url_key'];
-    baseImage =
-        json['base_image'] != null ? ProductImage.fromJson(json['base_image']) : null;
+    price = num.tryParse(json['price']?.toString()??'0')??0;
+    formatedPrice = json['formated_price'];
+    shortDescription = json['short_description'];
+    description = json['description'];
+    sku = json['sku'];
     if (json['images'] != null) {
       images = <ProductImage>[];
       json['images'].forEach((v) {
-        images!.add(ProductImage.fromJson(v));
+        images!.add(new ProductImage.fromJson(v));
       });
     }
-    isNew = json['is_new'];
-    isFeatured = json['is_featured'];
-    onSale = json['on_sale'];
-    isSaleable = json['is_saleable'];
-    isWishlist = json['is_wishlist'];
-    minPrice = json['min_price'];
-    prices = json['prices'] != null ? Prices.fromJson(json['prices']) : null;
-    priceHtml = json['price_html'];
-    avgRatings = json['avg_ratings'];
+    if (json['variants'] != null) {
+      variants = <Variants>[];
+      json['variants'].forEach((v) {
+        variants!.add(new Variants.fromJson(v));
+      });
+    }
+    baseImage = json['base_image'] != null
+        ? new ProductImage.fromJson(json['base_image'])
+        : null;
+
+    inStock = json['in_stock'];
+    reviews =
+    json['reviews'] != null ? new Reviews.fromJson(json['reviews']) : null;
+    isSaved = json['is_saved'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['sku'] = this.sku;
+    data['type'] = this.type;
     data['name'] = this.name;
-    data['description'] = this.description;
     data['url_key'] = this.urlKey;
-    if (this.baseImage != null) {
-      data['base_image'] = this.baseImage!.toJson();
-    }
+    data['price'] = this.price;
+    data['formated_price'] = this.formatedPrice;
+    data['short_description'] = this.shortDescription;
+    data['description'] = this.description;
+    data['sku'] = this.sku;
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
-    data['is_new'] = this.isNew;
-    data['is_featured'] = this.isFeatured;
-    data['on_sale'] = this.onSale;
-    data['is_saleable'] = this.isSaleable;
-    data['is_wishlist'] = this.isWishlist;
-    data['min_price'] = this.minPrice;
-    if (this.prices != null) {
-      data['prices'] = this.prices!.toJson();
+    if (this.baseImage != null) {
+      data['base_image'] = this.baseImage!.toJson();
     }
-    data['price_html'] = this.priceHtml;
-    data['avg_ratings'] = this.avgRatings;
+    if (this.variants != null) {
+      data['variants'] = this.variants!.map((v) => v.toJson()).toList();
+    }
+    data['in_stock'] = this.inStock;
+    if (this.reviews != null) {
+      data['reviews'] = this.reviews!.toJson();
+    }
+    data['is_saved'] = this.isSaved;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
@@ -259,7 +277,7 @@ class Meta {
       });
     }
     path = json['path'];
-    perPage = json['per_page'];
+    perPage = num.parse(json['per_page'].toString());
     to = json['to'];
     total = json['total'];
   }

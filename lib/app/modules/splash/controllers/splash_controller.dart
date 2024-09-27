@@ -1,4 +1,7 @@
 import 'package:bring_me_bd/app/core/controllers/auth_controller.dart';
+import 'package:bring_me_bd/app/core/utility/logger.dart';
+import 'package:bring_me_bd/app/data/dto_models/check_phone_status_response.dart';
+import 'package:bring_me_bd/app/data/repository/customer_repository_impl.dart';
 import 'package:bring_me_bd/app/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -17,9 +20,9 @@ class SplashController extends GetxController {
   }
 
   @override
-  void dispose() {
+  void onClose() {
     phoneNumberController.dispose();
-    super.dispose();
+    super.onClose();
   }
 
   void _checkUserAuthorization() async {
@@ -33,7 +36,21 @@ class SplashController extends GetxController {
     }
   }
 
-  verifyNumber() {
+  verifyNumber() async {
+    try {
+      var number = "88${phoneNumberController.text}";
+      CheckPhoneStatusResponse response =
+          await Get.find<CustomerRepositoryImpl>().checkCustomerStatus(number);
 
+      if (response.message == "New User") {
+        Get.toNamed(Routes.PHONE_REGISTER,arguments: number);
+      } else {
+        Get.toNamed(Routes.PHONE_LOGIN, arguments: number);
+      }
+    } catch (e, s) {
+      Logger.printLog(e);
+      Logger.printLog(s);
+      Get.snackbar('Error', 'Login failed');
+    }
   }
 }

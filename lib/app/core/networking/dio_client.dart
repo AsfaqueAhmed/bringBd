@@ -13,9 +13,9 @@ abstract class DioClient {
     ));
 
 
-    dio.interceptors.add(LoggingInterceptor());
-    dio.interceptors.add(ErrorInterceptor());
     dio.interceptors.add(TokenInterceptor());
+    dio.interceptors.add(ErrorInterceptor());
+    dio.interceptors.add(LoggingInterceptor());
 
     return dio;
   }

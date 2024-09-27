@@ -11,5 +11,6 @@ class AuthController extends GetxController {
 
   void setToken(String newToken) {
     _token.value = newToken;
+    GetStorage().write("token", _token.value);
   }
 }

@@ -26,13 +26,13 @@ class SplashView extends GetView<SplashController> {
           ),
           const SizedBox(height: 16),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(32.0),
             child: Obx(
               () => ClipRect(
                 child: AnimatedAlign(
                   alignment: Alignment.topCenter,
                   heightFactor: controller.showPhoneInput.value ? 1 : 0,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -52,11 +52,17 @@ class SplashView extends GetView<SplashController> {
                       ),
                       const SizedBox(height: 24),
                       AppTextField(
-                        hint: '01XXXXXXXXX',
-                        label: 'Phone Number',
-                        controller: controller.phoneNumberController,
-                        //errorMessage: "tes",
-                      ),
+                          hint: '01XXXXXXXXX',
+                          label: 'Phone Number',
+                          controller: controller.phoneNumberController,
+                          prefix: const Text(
+                            "+88 ",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          )
+                          //errorMessage: "tes",
+                          ),
                       const SizedBox(height: 16),
                       AppButton(
                         title: "Continue",

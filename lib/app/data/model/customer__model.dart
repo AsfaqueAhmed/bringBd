@@ -7,6 +7,7 @@ class CustomerModel extends CustomerEntity {
     required super.email,
     required super.password,
     required super.passwordConfirmation,
+    required super.phone,
   });
 
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
@@ -16,6 +17,7 @@ class CustomerModel extends CustomerEntity {
       email: json['email'],
       password: json['password'],
       passwordConfirmation: json['password_confirmation'],
+      phone: json['phone'],
     );
   }
 
@@ -23,9 +25,10 @@ class CustomerModel extends CustomerEntity {
     return {
       'first_name': firstName,
       'last_name': lastName,
-      'email': email,
+      'email': email.isEmpty ? null : email,
       'password': password,
       'password_confirmation': passwordConfirmation,
+      'phone': phone,
     };
   }
 }

@@ -6,8 +6,8 @@ class EnvConfig {
   static final Map<Environment, Map<EnvVariable, String>>
       _availableEnvironments = {
     Environment.staging: {
-      EnvVariable.authUrl: 'https://staging.bringmebd.com',
-      EnvVariable.baseUrl: 'https://staging.bringmebd.com',
+      EnvVariable.authUrl: 'https://staging.bringmebd.com/api',
+      EnvVariable.baseUrl: 'https://staging.bringmebd.com/api',
     },
     Environment.production: {
       EnvVariable.baseUrl: '',

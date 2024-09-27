@@ -12,12 +12,10 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(
-        Routes.PRODUCT_DETAILS,
-        arguments: product,
-        preventDuplicates: false,
-        parameters: {"id":product.id.toString()}
-      ),
+      onTap: () => Get.toNamed(Routes.PRODUCT_DETAILS,
+          arguments: product,
+          preventDuplicates: false,
+          parameters: {"id": product.id.toString()}),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 178),
         margin: const EdgeInsets.all(8),
@@ -34,11 +32,12 @@ class ProductTile extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AspectRatio(
-                aspectRatio: 1.3,
+              Expanded(
                 child: CachedNetworkImage(
                   imageUrl: product.baseImage?.mediumImageUrl ?? '',
                   fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
                 ),
               ),
               Padding(
@@ -49,10 +48,17 @@ class ProductTile extends StatelessWidget {
                     Text(
                       product.name!,
                       maxLines: 2,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
-                      product.minPrice!,
-                      style: const TextStyle(fontSize: 14),
+                      product.formatedPrice!.toString(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w200,
+                      ),
                     ),
                   ],
                 ),

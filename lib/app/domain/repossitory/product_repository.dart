@@ -12,5 +12,7 @@ abstract class ProductRepository {
 
   Future<ProductListResponse> getRelatedProducts(num? id);
 
+  Future<ProductListResponse> getRelatedProductsBySku(dynamic? sku);
+
   Future<ProductListResponse> getProductsByCategory(num? id);
 }

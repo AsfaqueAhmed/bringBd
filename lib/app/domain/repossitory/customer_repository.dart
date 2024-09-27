@@ -7,4 +7,6 @@ abstract class CustomerRepository {
   Future<void> login({required String email, required String password});
 
   Future<CheckPhoneStatusResponse> checkCustomerStatus(String number);
+
+  verifyOtp({required String phone, required String otp});
 }

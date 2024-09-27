@@ -1,10 +1,10 @@
 class ProductDetailsResponse {
-  Data? data;
+  ProductDetails? data;
 
   ProductDetailsResponse({this.data});
 
   ProductDetailsResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? ProductDetails.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -16,7 +16,7 @@ class ProductDetailsResponse {
   }
 }
 
-class Data {
+class ProductDetails {
   num? id;
   String? sku;
   String? type;
@@ -36,10 +36,10 @@ class Data {
   bool? isSaved;
   bool? isItemInCart;
   bool? showQuantityChanger;
-  List<Variants>? variants;
+  List<ProductDetails>? variants;
   List<SuperAttributes>? superAttributes;
 
-  Data(
+  ProductDetails(
       {this.id,
       this.sku,
       this.type,
@@ -62,7 +62,7 @@ class Data {
       this.variants,
       this.superAttributes});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  ProductDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sku = json['sku'];
     type = json['type'];
@@ -96,9 +96,9 @@ class Data {
     isItemInCart = json['is_item_in_cart'];
     showQuantityChanger = json['show_quantity_changer'];
     if (json['variants'] != null) {
-      variants = <Variants>[];
+      variants = <ProductDetails>[];
       json['variants'].forEach((v) {
-        variants!.add(Variants.fromJson(v));
+        variants!.add(ProductDetails.fromJson(v));
       });
     }
     if (json['super_attributes'] != null) {

@@ -62,4 +62,13 @@ class ProductRepositoryImpl extends ProductRepository {
 
     return ProductListResponse.fromJson(response.data);
   }
+
+  @override
+  Future<ProductListResponse> getRelatedProductsBySku(sku) async {
+    final response = await _dio.get(
+      ApiEndPoints.relatedProductsBySku(sku),
+    );
+
+    return ProductListResponse.fromJson(response.data);
+  }
 }
