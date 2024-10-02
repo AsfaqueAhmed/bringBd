@@ -87,7 +87,7 @@ class PhoneRegisterView extends GetView<PhoneRegisterController> {
                   ),
                 ),
                 AppTextField(
-                  hint: 'Email Ex(01XXXXXXXXX)',
+                  hint: 'Phone Ex(01XXXXXXXXX)',
                   label: 'Phone Number',
                   enable: false,
                   //onInputChange: controller.email.call,

@@ -22,6 +22,9 @@ void main() {
         getPages: AppPages.routes,
         theme: ThemeData.light().copyWith(
           textTheme: GoogleFonts.comfortaaTextTheme(),
+          appBarTheme: const AppBarTheme(
+            surfaceTintColor: Colors.transparent,
+          )
         ),
       ),
     ),

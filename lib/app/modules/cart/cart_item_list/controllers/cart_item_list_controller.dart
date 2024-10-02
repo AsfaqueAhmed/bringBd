@@ -1,5 +1,6 @@
 import 'package:bring_me_bd/app/data/dto_models/cart_details_response.dart';
 import 'package:bring_me_bd/app/modules/home/controllers/cart_controller.dart';
+import 'package:bring_me_bd/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class CartItemListController extends GetxController {
@@ -12,5 +13,9 @@ class CartItemListController extends GetxController {
   void onInit() {
     cartController.loadCartDetails();
     super.onInit();
+  }
+
+  void toCheckOut() {
+    Get.offNamed(Routes.CHECK_OUT);
   }
 }

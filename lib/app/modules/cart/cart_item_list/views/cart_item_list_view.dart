@@ -14,14 +14,57 @@ class CartItemListView extends GetView<CartItemListController> {
         title: const Text('Cart Items'),
         centerTitle: true,
       ),
-      body: Obx(() {
-        return ListView.builder(
-          itemBuilder: (_, index) {
-            return CartItemTile(item: controller.items[index]);
-          },
-          itemCount: controller.items.length,
-        );
-      }),
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                itemBuilder: (_, index) {
+                  return CartItemTile(item: controller.items[index]);
+                },
+                itemCount: controller.items.length,
+              );
+            }),
+          ),
+
+          Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 2,
+                ),
+              ],
+              color: Colors.white,
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: controller.toCheckOut,
+                    child: Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: const Center(
+                        child: Text(
+                          "Add To Cart",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
